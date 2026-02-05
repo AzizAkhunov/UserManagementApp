@@ -1,0 +1,83 @@
+﻿@model List<UserManagementApp.Models.User>
+
+<h3>Users</h3>
+
+<form method="post" id="usersForm">
+
+    <!-- TOOLBAR -->
+    <div class="mb-2">
+        <button class="btn btn-outline-danger me-1"
+                formaction="/Users/Block"
+                disabled>
+            Block
+        </button>
+
+        <button class="btn btn-outline-secondary me-1"
+                formaction="/Users/Unblock"
+                disabled>
+            Unblock
+        </button>
+
+        <button class="btn btn-outline-dark me-1"
+                formaction="/Users/Delete"
+                disabled>
+            Delete
+        </button>
+
+        <button class="btn btn-outline-warning"
+                formaction="/Users/DeleteUnverified">
+            Delete unverified
+        </button>
+    </div>
+
+    <!-- TABLE -->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" id="selectAll" />
+                </th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Last login</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox"
+                               name="ids"
+                               value="@user.Id"
+                               class="row-check" />
+                    </td>
+                    <td>@user.Email</td>
+                    <td>@user.Status</td>
+                    <td>@user.LastLoginTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</form>
+
+<script>
+    const selectAll = document.getElementById("selectAll");
+    const checks = document.querySelectorAll(".row-check");
+    const buttons = document.querySelectorAll("button[disabled]");
+
+    function updateButtons() {
+        const anyChecked = [...checks].some(c => c.checked);
+        buttons.forEach(b => b.disabled = !anyChecked);
+    }
+
+    selectAll.addEventListener("change", () => {
+        checks.forEach(c => c.checked = selectAll.checked);
+        updateButtons();
+    });
+
+    checks.forEach(c => {
+        c.addEventListener("change", updateButtons);
+    });
+</script>

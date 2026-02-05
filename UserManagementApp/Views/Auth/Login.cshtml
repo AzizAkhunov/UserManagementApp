@@ -1,0 +1,14 @@
+﻿@model UserManagementApp.ViewModels.LoginViewModel
+
+<h3>Login</h3>
+
+<form method="post" class="w-25 mx-auto mt-5">
+    <input asp-for="Email" class="form-control mb-2" placeholder="Email" />
+    <input asp-for="Password" type="password" class="form-control mb-2" placeholder="Password" />
+
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+
+    <div class="text-danger mt-2">
+        @Html.ValidationSummary()
+    </div>
+</form>
