@@ -44,3 +44,9 @@ app.MapControllerRoute(
     pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();
+
+var port = Environment.GetEnvironmentVariable("PORT");
+if (port != null)
+{
+    app.Urls.Add($"http://*:{port}");
+}
