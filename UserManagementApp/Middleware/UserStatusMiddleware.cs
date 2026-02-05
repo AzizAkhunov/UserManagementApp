@@ -18,11 +18,11 @@ namespace UserManagementApp.Middleware
         {
             if (context.User.Identity?.IsAuthenticated == true)
             {
-                var userIdStr = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                if (int.TryParse(userIdStr, out int userId))
+                if (userId != null)
                 {
-                    var user = await db.Users.FindAsync(userId);
+                    var user = await db.Users.FindAsync(int.Parse(userId));
 
                     if (user == null || user.Status == UserStatus.Blocked)
                     {
