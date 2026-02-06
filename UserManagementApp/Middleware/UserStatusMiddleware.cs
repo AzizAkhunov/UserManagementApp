@@ -34,6 +34,6 @@ namespace UserManagementApp.Middleware
             }
 
             await _next(context);
-        }
+        }   
     }
 }
