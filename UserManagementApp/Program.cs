@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using UserManagementApp.Data;
 using UserManagementApp.Middleware;
 
+Environment.SetEnvironmentVariable("DOTNET_USE_POLLING_FILE_WATCHER", "true");
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
